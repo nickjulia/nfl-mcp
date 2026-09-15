@@ -396,7 +396,9 @@ GAME / STADIUM / WEATHER
 """,
     "vegas": """
 VEGAS / BETTING
-  spread_line   DOUBLE PRECISION  point spread (negative = home favored)
+  spread_line   DOUBLE PRECISION  point spread from the home team's perspective:
+                                  POSITIVE = home favored (+2.5 means the home
+                                  team is laying 2.5), negative = home underdog
   total_line    DOUBLE PRECISION  over/under total
 """,
     "aggregate_tables": """
