@@ -17,6 +17,7 @@ from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.routing import Route
 
+from .config import FIRST_SEASON, current_season
 from .tools import (
     nfl_schema, nfl_status, nfl_query, nfl_search_plays,
     nfl_team_stats, nfl_player_stats, nfl_compare,
@@ -139,7 +140,7 @@ TOOLS = [
                 },
                 "season": {
                     "type": "integer",
-                    "description": "Exact season year (2013–2025). Use season_from/season_to for ranges.",
+                    "description": f"Exact season year ({FIRST_SEASON}–{current_season()}). Use season_from/season_to for ranges.",
                 },
                 "season_from": {
                     "type": "integer",

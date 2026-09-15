@@ -14,7 +14,9 @@ import polars as pl
 from pathlib import Path
 from tqdm import tqdm
 
-ALL_SEASONS = list(range(2013, 2026))
+from .config import FIRST_SEASON, current_season
+
+ALL_SEASONS = list(range(FIRST_SEASON, current_season() + 1))
 
 
 def _apply_duckdb_pragmas(conn: duckdb.DuckDBPyConnection, db_path: str) -> None:
@@ -861,8 +863,8 @@ def run_ingest_datasets(
 
     bulk_mode = start is None and end is None
     if not bulk_mode:
-        start = start or 2013
-        end = end or 2025
+        start = start or FIRST_SEASON
+        end = end or current_season()
         if start > end:
             raise ValueError("start must be less than or equal to end")
 
@@ -951,8 +953,8 @@ def run_ingest_datasets(
 
 
 def run_ingest(
-    start: int = 2013,
-    end: int = 2025,
+    start: int = FIRST_SEASON,
+    end: int | None = None,
     fresh: bool = False,
     skip_views: bool = False,
     db_path: str | None = None,
